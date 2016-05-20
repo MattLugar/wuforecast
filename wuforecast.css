@@ -1,14 +1,18 @@
-.weatherforecast .day {
+.wuforecast .day {
   padding-left: 0;
-  padding-right: 25px;
+  padding-right: 20px;
 }
 
-.weatherforecast .weather-icon {
-  padding-right: 30px;
+.wuforecast .weather-icon {
+  padding-right: 20px;
   text-align: center;
 }
 
-.weatherforecast .min-temp {
+.wuforecast .pop {
+  text-align: right;
+}
+
+.wuforecast .min-temp {
   padding-left: 20px;
   padding-right: 0;
 }

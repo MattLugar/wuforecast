@@ -22,7 +22,9 @@ Module.register("wuforecast",{
 		timeFormat: config.timeFormat,
 		lang: config.language,
 		fade: true,
+		degreeSym: true,
 		pop: true,
+		iconSet: "k",
 		fadePoint: 0.25, // Start on 1/4th of the list.
 
 		initialLoadDelay: 2500, // 2.5 seconds delay. This delay is used to keep the wunderground API happy.
@@ -30,6 +32,28 @@ Module.register("wuforecast",{
 
 		apiBase: "http://api.wunderground.com/api/",
 		forecastEndpoint: "/forecast10day/q/",
+
+                iconTable: {
+                        "chanceflurries": "wi-day-snow-wind",
+                        "chancerain": "wi-day-showers",
+                        "chancesleet": "wi-day-sleet",
+                        "chancesnow": "wi-day-snow",
+                        "chancetstorms": "wi-day-storm-showers",
+                        "clear": "wi-day-sunny",
+                        "cloudy": "wi-cloud",
+                        "flurries": "wi-snow-wind",
+                        "fog": "wi-fog",
+                        "haze": "wi-day-haze",
+                        "mostlycloudy": "wi-cloudy",
+                        "mostlysunny": "wi-day-sunny-overcast",
+                        "partlycloudy": "wi-day-cloudy",
+                        "partlysunny": "wi-day-cloudy-high",
+			"rain": "wi-rain",
+                        "sleet": "wi-sleet",
+                        "snow": "wi-snow",
+                        "tstorms": "wi-thunderstorm"
+                },
+
 
 	},
 
@@ -64,6 +88,7 @@ Module.register("wuforecast",{
 		this.iconText = null;
 
 		this.updateTimer = null;
+		this.degSymbol = null;
 
 	},
 
@@ -104,36 +129,44 @@ Module.register("wuforecast",{
 			dayCell.innerHTML = forecast.day;
 			row.appendChild(dayCell);
 
+                        var popCell = document.createElement("td");
+			popCell.className = "align-right pop";
+                        if (forecast.pop > 0 && this.config.pop) {
+                                popCell.innerHTML = "  <sup>" + forecast.pop + "%</sup>";
+                        }
+                        row.appendChild(popCell);
+
 			var iconCell = document.createElement("td");
-			iconCell.className = "bright weather-icon";
+			iconCell.className = "align-center bright weather-icon";
 			row.appendChild(iconCell);
 
 			var icon = document.createElement("span");
-			icon.innerHTML = "<img src=\"" + forecast.icon + "\" width=\"35%\" height=\"48%\">";
-			if (forecast.pop > 0 && this.config.pop) {
-				icon.innerHTML = "<sup>" + forecast.pop + "%</sup>" + icon.innerHTML;
-			}
-			console.log("icon: " + this.iconText);
+			icon.className = forecast.icon;
 			iconCell.appendChild(icon);
+
+			// Set the degree symbol if desired
+			if (this.config.degreeSym) {
+				degSymbol = "&deg;";
+			}
 
 			var maxTempCell = document.createElement("td");
 			if (this.config.units === "imperial") {
-				maxTempCell.innerHTML = forecast.maxTemp;
+				maxTempCell.innerHTML = forecast.maxTemp + degSymbol;
 			} else if (this.config.units === "metric") {
-				maxTempCell.innerHTML = forecast.maxTempC;
+				maxTempCell.innerHTML = forecast.maxTempC + degSymbol;
 			} else {
-				maxTempCell.innerHTML = forecast.maxTempC + 273;
+				maxTempCell.innerHTML = forecast.maxTempC + 273 + degSymbol;
 			}
 			maxTempCell.className = "align-right bright max-temp";
 			row.appendChild(maxTempCell);
 
 			var minTempCell = document.createElement("td");
                         if (this.config.units === "imperial") {
-                                minTempCell.innerHTML = forecast.minTemp;
+                                minTempCell.innerHTML = forecast.minTemp + degSymbol;
                         } else if (this.config.units === "metric") {
-                                minTempCell.innerHTML = forecast.minTempC;
+                                minTempCell.innerHTML = forecast.minTempC  + degSymbol;
                         } else {
-                                minTempCell.innerHTML = forecast.minTempC + 273;
+                                minTempCell.innerHTML = forecast.minTempC + 273 + degSymbol;
                         }
 			minTempCell.className = "align-right min-temp";
 			row.appendChild(minTempCell);
@@ -211,7 +244,8 @@ Module.register("wuforecast",{
 			this.forecast.push({
 
 				day: moment(forecast.date.epoch, "X").format("ddd"),
-				icon: forecast.icon_url,
+//				icon: forecast.icon_url,
+                                icon: this.config.iconTable[forecast.icon],
 				pop: forecast.pop,
 				maxTemp: this.roundValue(forecast.high.fahrenheit),
 				minTemp: this.roundValue(forecast.low.fahrenheit),
