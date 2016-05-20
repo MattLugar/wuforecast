@@ -1,8 +1,7 @@
 # Module: Weather Underground Forecast
-This is a module for MagicMirror
+This is a module for MagicMirror, modified of the default `weatherforecast` module. 
 
-This module displays the weather forecast for the coming week, including an an icon to display the current conditions, the chance of precepitation, the minimum temperature and the maximum temperature.
-This is a modified version of the default `weatherforecast` module for MagicMirror. It retrieves its weather data from Weather Underground.
+This is similar to the default `weatherforecast` module, however it has additional functionality (such as displaying the probability of precipitation for each day). It also retrieves its data from Weather Underground instead of OpenWeatherMap.
 
 ## Using the module
 
@@ -62,6 +61,13 @@ The following properties can be configured:
 			<td><code>pop</code></td>
 			<td>Display or not display the probability of precipitation. Specified by config.js<br>
 				<br><b>Possible values:</b> <code>true</code> = Display the Probability of Precipitation if above 0%, <code>false</code> = Do not display the Probability of Precipitation
+				<br><b>Default value:</b> <code>true</code>
+			</td>
+		</tr>
+		<tr>
+			<td><code>degreeSym</code></td>
+			<td>Display or not display the degree symbol after the high and low temps. Specified by config.js<br>
+				<br><b>Possible values:<b> <code>true</code> = Display the degree symbol after the high/low temps. <b> <code>False</code> = Do not dsplay the degree symbol after the high/low temps.
 				<br><b>Default value:</b> <code>true</code>
 			</td>
 		</tr>
@@ -139,3 +145,5 @@ The following properties can be configured:
 
 	</tbody>
 </table>
+
+
