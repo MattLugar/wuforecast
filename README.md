@@ -1,6 +1,8 @@
-# Module: Weather Forecast
-The `weatherforecast` module is one of the default modules of the MagicMirror.
-This module displays the weather forecast for the coming week, including an an icon to display the current conditions, the minimum temperature and the maximum temperature.
+# Module: Weather Underground Forecast
+This is a module for MagicMirror
+
+This module displays the weather forecast for the coming week, including an an icon to display the current conditions, the chance of precepitation, the minimum temperature and the maximum temperature.
+This is a modified version of the default `weatherforecast` module for MagicMirror.
 
 ## Using the module
 
