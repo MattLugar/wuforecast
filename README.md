@@ -67,7 +67,7 @@ The following properties can be configured:
 		<tr>
 			<td><code>degreeSym</code></td>
 			<td>Display or not display the degree symbol after the high and low temps. Specified by config.js<br>
-				<br><b>Possible values:<b> <code>true</code> = Display the degree symbol after the high/low temps. <b> <code>False</code> = Do not dsplay the degree symbol after the high/low temps.
+				<br><b>Possible values:</b> <code>true</code> = Display the degree symbol after the high/low temps.  <code>False</code> = Do not dsplay the degree symbol after the high/low temps.
 				<br><b>Default value:</b> <code>true</code>
 			</td>
 		</tr>
