@@ -57,6 +57,13 @@ The following properties can be configured:
 			</td>
 		</tr>
 		<tr>
+			<td><code>pop</code></td>
+			<td>Display or not display the probability of precipitation. Specified by config.js<br>
+				<br><b>Possible values:</b> <code>true</code> = Display the Probability of Precipitation if above 0%, <code>false</code> = Do not display the Probability of Precipitation
+				<br><b>Default value:</b> <code>true</code>
+			</td>
+		</tr>
+		<tr>
 			<td><code>maxNumberOfDays</code></td>
 			<td>How many days of forecast to return. Specified by config.js<br>
 				<br><b>Possible values:</b> <code>1</code> - <code>10</code>
